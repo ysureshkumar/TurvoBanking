@@ -81,24 +81,4 @@ public class TokenController {
 		return ResponseEntity.ok().body(token);
 	}
 
-	@GetMapping("/counters/{counterid}")
-	public ResponseEntity<CounterQueue> getCounter(@PathVariable(value = "counterid") Integer counterid) {
-
-		CounterQueue counterQueue = tokenService.getCounterById(counterid);
-		if (counterQueue == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok().body(counterQueue);
-	}
-
-	@GetMapping("/counters/getallcounters")
-	public List<CounterQueue> getAllCounters() {
-
-		List<CounterQueue> listOfAllCounters = tokenService.getAllCounters();
-		if (listOfAllCounters.size() == 0) {
-			return null;
-		}
-		return listOfAllCounters;
-	}
-
 }
