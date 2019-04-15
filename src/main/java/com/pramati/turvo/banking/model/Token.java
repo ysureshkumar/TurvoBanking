@@ -23,19 +23,19 @@ public class Token {
 	
 	private Integer counterid;
 	
-	private String services;
+	private Long serviceid;
 		
 	private String status;
 
 	public Token() {
 	}
 
-	public Token(Long tokenid, Long customerid, Integer counterid, String services, String status) {
+	public Token(Long tokenid, Long customerid, Integer counterid, Long serviceid, String status) {
 		super();
 		this.tokenid = tokenid;
 		this.customerid = customerid;
 		this.counterid = counterid;
-		this.services = services;
+		this.serviceid = serviceid;
 		this.status = status;
 	}
 
@@ -63,12 +63,12 @@ public class Token {
 		this.counterid = counterid;
 	}
 
-	public String getServices() {
-		return services;
+	public Long getServiceid() {
+		return serviceid;
 	}
 
-	public void setServices(String services) {
-		this.services = services;
+	public void setServiceid(Long serviceid) {
+		this.serviceid = serviceid;
 	}
 
 	public String getStatus() {
@@ -80,6 +80,6 @@ public class Token {
 	}
 
 	public String toString() {
-		return tokenid + "-" + customerid + "-" + counterid + "-" + services + "-" + status;
+		return tokenid + "-" + customerid + "-" + counterid + "-" + serviceid + "-" + status;
 	}
 }

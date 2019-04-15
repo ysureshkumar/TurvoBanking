@@ -18,9 +18,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Customer {
 	
 	@Id
-	@Column(name = "Id")
+	@Column(name = "customerid")
 	@GeneratedValue(strategy=GenerationType.AUTO) 
-	private Long id;
+	private Long customerid;
 	
 	@NotBlank
 	private String name;
@@ -29,17 +29,17 @@ public class Customer {
 	private String phno;
 	
 	@NotBlank
-	private String serviceType;
+	private String servicetype;
 	
 	@NotBlank
 	private String address;
 
-	public Long getId() {
-		return id;
+	public Long getCustomerid() {
+		return customerid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCustomerid(Long customerid) {
+		this.customerid = customerid;
 	}
 
 	public String getName() {
@@ -58,12 +58,12 @@ public class Customer {
 		this.phno = phno;
 	}
 
-	public String getServiceType() {
-		return serviceType;
+	public String getServicetype() {
+		return servicetype;
 	}
 
-	public void setServiceType(String serviceType) {
-		this.serviceType = serviceType;
+	public void setServicetype(String servicetype) {
+		this.servicetype = servicetype;
 	}
 
 	public String getAddress() {

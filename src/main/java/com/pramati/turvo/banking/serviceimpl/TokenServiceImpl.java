@@ -54,7 +54,7 @@ public class TokenServiceImpl implements TokenService {
 		Long customerid;
 		Long tokenid;
 		Integer selectedCounterid;
-		String services;
+		Long serviceid;
 		String status;
 		Token tokenToAssign = new Token();
 
@@ -69,7 +69,7 @@ public class TokenServiceImpl implements TokenService {
 			}
 
 			String customerServiceType;
-			customerServiceType = customer.getServiceType();
+			customerServiceType = customer.getServicetype();
 
 			selectedCounterid = 0;
 			if (customerServiceType.equals("prime")) {
@@ -93,7 +93,7 @@ public class TokenServiceImpl implements TokenService {
 				}
 			}
 
-			services = token.getServices();
+			serviceid = token.getServiceid();
 
 			// default status of the token which might be updated as complete or cancel
 			// later
@@ -102,7 +102,7 @@ public class TokenServiceImpl implements TokenService {
 			tokenToAssign.seTokenid(tokenid);
 			tokenToAssign.setCustomerid(customerid);
 			tokenToAssign.setCounterid(selectedCounterid);
-			tokenToAssign.setServices(services);
+			tokenToAssign.setServiceid(serviceid);
 			tokenToAssign.setStatus(status);
 
 			tokenDAO.save(tokenToAssign);

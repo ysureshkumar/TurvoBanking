@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customerToUpdate.setName(customer.getName());
 		customerToUpdate.setPhno(customer.getPhno());
 		customerToUpdate.setAddress(customer.getAddress());
-		customerToUpdate.setServiceType(customer.getServiceType());
+		customerToUpdate.setServicetype(customer.getServicetype());
 		
 		return  customerDAO.update(customerToUpdate);
 	}
