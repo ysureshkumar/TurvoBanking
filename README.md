@@ -106,6 +106,6 @@ work in progress
 
 ## A Small Description how tokens will be assigned
 
-First it will check counters based on the customer type and then check for the availability of the counters based on queue size and allot the respective counter to customer
-I have limited each counter queue size as 5 . If Counter Queue full with 5 mins then it will check the next repective counter and allot the counter.
+First it will check counters based on the customer type and then check for the availability of the counters based on queue size and allocate the respective counter to the customer
+I have limited each counter queue size as 5 . If Counter Queue full with 5 members then it will check the next repective counter and allocate to the customer
 
