@@ -152,13 +152,43 @@ public class TokenServiceImpl implements TokenService {
 		return ResponseEntity.ok().body(tokenDAO.save(tokenToAssign));
 	}
 
-	public List<Token> getAllTokens() {
-		return tokenDAO.findAll();
+	public ResponseEntity<? extends Object> getAllTokens() {
+		 List<Token> listOfTokens =  tokenDAO.findAll();
+
+		 if (listOfTokens.size() == 0) {
+				String errorMessage = "No Tokens Avaialable";
+				TurvoException turvoException = new TurvoException();
+				turvoException.setStatus(HttpStatus.OK.value());
+				turvoException.setMessage(errorMessage);
+				turvoException.setError(null);
+				turvoException.setException(null);
+				return ResponseEntity.ok().body(turvoException);
+			}
+
+			return ResponseEntity.ok().body(listOfTokens);
+
 	}
 
 	public Token getTokenById(Long tokenId) {
-		// TODO Auto-generated method stub
+
 		return tokenDAO.findOne(tokenId);
+	}
+
+	public ResponseEntity<? extends Object> getToken(Long tokenId) {
+
+		Token tokenToFind = this.getTokenById(tokenId);
+
+		if (tokenToFind == null) {
+			String errorMessage = "Invalid Token-Id: " + tokenId;
+			TurvoException turvoException = new TurvoException();
+			turvoException.setStatus(HttpStatus.BAD_REQUEST.value());
+			turvoException.setMessage(errorMessage);
+			turvoException.setError(HttpStatus.BAD_REQUEST);
+			turvoException.setException(turvoException.getClass().toString());
+			return ResponseEntity.ok().body(turvoException);
+		}
+
+		return ResponseEntity.ok().body(tokenToFind);
 	}
 
 	public ResponseEntity<? extends Object> markToken(Long tokenId, Token requestedToken) {
@@ -404,10 +434,10 @@ public class TokenServiceImpl implements TokenService {
 		Long countOfCounters = counterService.getCountOfCounters();
 		if (countOfCounters == null) {
 			TurvoException turvoException = new TurvoException();
-			turvoException.setStatus(HttpStatus.BAD_REQUEST.value());
+			turvoException.setStatus(HttpStatus.OK.value());
 			turvoException.setMessage("No Counters Are Available");
-			turvoException.setError(HttpStatus.BAD_REQUEST);
-			turvoException.setException(turvoException.getClass().toString());
+			turvoException.setError(null);
+			turvoException.setException(null);
 			return ResponseEntity.ok().body(turvoException);
 		}
 

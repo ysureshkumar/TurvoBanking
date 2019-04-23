@@ -80,12 +80,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public ResponseEntity<? extends Object> getAllCustomers() {
 		List<Customer> lisOfCustomers = new ArrayList<Customer>();
 		lisOfCustomers = customerDAO.findAll();
-		if (lisOfCustomers == null) {
+		if (lisOfCustomers.size() == 0) {
 			TurvoException turvoException = new TurvoException();
-			turvoException.setStatus(HttpStatus.BAD_REQUEST.value());
+			turvoException.setStatus(HttpStatus.OK.value());
 			turvoException.setMessage("No Customers Available");
-			turvoException.setError(HttpStatus.BAD_REQUEST);
-			turvoException.setException(turvoException.getClass().toString());
+			turvoException.setError(null);
+			turvoException.setException(null);
 		}
 		return ResponseEntity.ok().body(lisOfCustomers);
 	}

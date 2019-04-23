@@ -11,9 +11,11 @@ public interface TokenService {
 
 	public ResponseEntity<? extends Object> markToken(Long tokenId, Token requestedToken);
 
-	public List<Token> getAllTokens();
+	public ResponseEntity<? extends Object> getAllTokens();
 
 	public Token getTokenById(Long tokenId);
+
+	public ResponseEntity<? extends Object> getToken(Long tokenId);
 
 	public ResponseEntity<? extends Object> getCounterById(Integer counterid);
 

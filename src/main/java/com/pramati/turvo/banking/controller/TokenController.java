@@ -55,17 +55,13 @@ public class TokenController {
 	}
 
 	@GetMapping("/tokens")
-	public List<Token> getAllTokens() {
+	public ResponseEntity<? extends Object> getAllTokens() {
 		return tokenService.getAllTokens();
 	}
 
 	@GetMapping("/tokens/{tokenId}")
-	public ResponseEntity<Token> createToken(@PathVariable(value = "tokenId") Long tokenId) {
-		Token token = tokenService.getTokenById(tokenId);
-		if (token == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok().body(token);
+	public ResponseEntity<? extends Object> getToken(@PathVariable(value = "tokenId") Long tokenId) {
+		return tokenService.getToken(tokenId);
 	}
 
 }
