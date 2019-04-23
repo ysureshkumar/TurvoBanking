@@ -1,5 +1,7 @@
 package com.pramati.turvo.banking.model;
 
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,17 +13,19 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Entity
 @Table(name = "counter")
 @EntityListeners(AuditingEntityListener.class)
 public class Counter {
-	
+
 	@Id
 	@Column(name = "counterid")
 	private Integer counterid;
-	
+
 	private String countertype;
-	
+
 	public Counter() {
 	}
 
@@ -29,7 +33,7 @@ public class Counter {
 		super();
 		this.counterid = counterid;
 		this.countertype = countertype;
-		}
+	}
 
 	public Integer getCounterid() {
 		return counterid;

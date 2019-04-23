@@ -20,18 +20,6 @@ public class CounterDAOImpl implements CounterDAO {
 		this.counterRepository = counterRepository;
 	}
 
-	public Counter save(Counter counter) {
-		return counterRepository.saveAndFlush(counter);
-	}
-
-	public Counter update(Counter counter) {
-		return counterRepository.saveAndFlush(counter);
-	}
-
-	public void delete(Counter counter) {
-		counterRepository.delete(counter);
-	}
-
 	public List<Counter> findAll() {
 		return counterRepository.findAll();
 	}

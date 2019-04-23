@@ -1,5 +1,6 @@
 package com.pramati.turvo.banking.model;
 
+import java.io.IOException;
 import java.util.Queue;
 
 import javax.persistence.Column;
@@ -13,12 +14,14 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class CounterQueue {
-	
+
 	private Integer counterId;
-	
+
 	private String counterType;
-		
+
 	private Queue<Long> counterQ;
 
 	public Integer getCounterId() {

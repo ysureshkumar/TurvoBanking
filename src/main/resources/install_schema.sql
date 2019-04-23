@@ -1,13 +1,4 @@
 
-
-CREATE TABLE `user` (
-  `userid` int(11) PRIMARY KEY AUTO_INCREMENT,
-  `active` int(11) DEFAULT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `rolename` varchar(50) DEFAULT NULL
-);
-
 CREATE TABLE `customer` (
   `customerid` bigint(20) PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -36,10 +27,6 @@ CREATE TABLE `token` (
   CONSTRAINT `token_service_FK` FOREIGN KEY (`serviceid`) REFERENCES `service` (`serviceid`),
   CONSTRAINT `token_counter_FK` FOREIGN KEY (`counterid`) REFERENCES `counter` (`counterid`)
 );
-
-
-insert into user values(1,1,'Pramati','pramatiadmin','ADMIN');
-insert into user values(2,0,'Suresh','sureshuser','USER');
 
 insert into counter values (1, 'regular');
 insert into counter values (2, 'regular');

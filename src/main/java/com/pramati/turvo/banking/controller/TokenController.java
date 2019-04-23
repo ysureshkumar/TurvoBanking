@@ -7,6 +7,7 @@ import java.util.Queue;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pramati.turvo.banking.errors.TurvoException;
 import com.pramati.turvo.banking.model.Counter;
 import com.pramati.turvo.banking.model.CounterQueue;
 import com.pramati.turvo.banking.model.Customer;
@@ -26,7 +28,7 @@ import com.pramati.turvo.banking.service.CustomerService;
 import com.pramati.turvo.banking.service.TokenService;
 
 @RestController
-@RequestMapping("/turvo/tokens")
+@RequestMapping("/turvo")
 public class TokenController {
 
 	@Autowired
@@ -40,39 +42,24 @@ public class TokenController {
 		this.tokenService = tokenService;
 	}
 
-	@PostMapping("/createtoken")
-	public Token createToken(@Valid @RequestBody Token token) {
+	@PostMapping("/tokens")
+	public ResponseEntity<? extends Object> createToken(@Valid @RequestBody Token token) {
+
 		return tokenService.createToken(token); // tokenService.createToken(token);
 	}
 
-	@PutMapping("/marktokenascomplete/{tokenId}")
-	public ResponseEntity<Token> markTokenAsComplete(@PathVariable(value = "tokenId") Long tokenId) {
-
-		Token tokenToUpdate = tokenService.markTokenAsComplete(tokenId);
-
-		if (tokenToUpdate == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok().body(tokenToUpdate);
+	@PutMapping("tokens/{tokenId}")
+	public ResponseEntity<? extends Object> markToken(@PathVariable(value = "tokenId") Long tokenId,
+			@Valid @RequestBody Token requestedToken) {
+		return tokenService.markToken(tokenId, requestedToken);
 	}
 
-	@PutMapping("/marktokenascancel/{tokenId}")
-	public ResponseEntity<Token> markTokenAsCancel(@PathVariable(value = "tokenId") Long tokenId) {
-
-		Token tokenToUpdate = tokenService.markTokenAsCancel(tokenId);
-
-		if (tokenToUpdate == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok().body(tokenToUpdate);
-	}
-
-	@GetMapping("/getalltokens")
+	@GetMapping("/tokens")
 	public List<Token> getAllTokens() {
 		return tokenService.getAllTokens();
 	}
 
-	@GetMapping("/gettoken/{tokenId}")
+	@GetMapping("/tokens/{tokenId}")
 	public ResponseEntity<Token> createToken(@PathVariable(value = "tokenId") Long tokenId) {
 		Token token = tokenService.getTokenById(tokenId);
 		if (token == null) {

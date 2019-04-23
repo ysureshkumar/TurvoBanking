@@ -3,17 +3,22 @@ package com.pramati.turvo.banking.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.pramati.turvo.banking.dao.CounterDAO;
 import com.pramati.turvo.banking.model.Counter;
 import com.pramati.turvo.banking.service.CounterService;
+import com.pramati.turvo.banking.service.TokenService;
 
 @Service
 public class CounterServiceImpl implements CounterService {
 
 	@Autowired
 	CounterDAO counterDAO;
+	
+	@Autowired
+	TokenService tokenService;
 
 	public CounterDAO getCounterDAO() {
 		return counterDAO;
@@ -23,27 +28,19 @@ public class CounterServiceImpl implements CounterService {
 		this.counterDAO = counterDAO;
 	}
 
-	public Counter createCounter(Counter counter) {
-		return counterDAO.save(counter);
-	}
-
-	public Counter updateCounter(Counter counter) {
+	public ResponseEntity<? extends Object> getAllCounters() {
 		// TODO Auto-generated method stub
-		return counterDAO.update(counter);
+		return tokenService.getAllCounters();
 	}
 
-	public void deleteCounter(Counter counter) {
-		counterDAO.delete(counter);
-	}
-
-	public List<Counter> getAllCounters() {
+	public Counter  getCounterById(Integer counterId) {
 		// TODO Auto-generated method stub
-		return counterDAO.findAll();
+		return counterDAO.findOne(counterId);
 	}
 
-	public Counter getCounterById(Integer CounterId) {
+	public ResponseEntity<? extends Object> getCounter(Integer counterId) {
 		// TODO Auto-generated method stub
-		return counterDAO.findOne(CounterId);
+		return tokenService.getCounterById(counterId);
 	}
 
 	public Long getCountOfCounters() {

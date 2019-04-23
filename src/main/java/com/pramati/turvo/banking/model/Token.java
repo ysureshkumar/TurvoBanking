@@ -1,5 +1,7 @@
 package com.pramati.turvo.banking.model;
 
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Entity
 @Table(name = "token")
 @EntityListeners(AuditingEntityListener.class)
@@ -18,13 +22,13 @@ public class Token {
 	@Id
 	@Column(name = "tokenid")
 	private Long tokenid;
-	
+
 	private Long customerid;
-	
+
 	private Integer counterid;
-	
+
 	private Long serviceid;
-		
+
 	private String status;
 
 	public Token() {
@@ -77,9 +81,5 @@ public class Token {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public String toString() {
-		return tokenid + "-" + customerid + "-" + counterid + "-" + serviceid + "-" + status;
 	}
 }

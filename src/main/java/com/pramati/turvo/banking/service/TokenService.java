@@ -2,22 +2,21 @@ package com.pramati.turvo.banking.service;
 
 import java.util.List;
 
-import com.pramati.turvo.banking.model.CounterQueue;
+import org.springframework.http.ResponseEntity;
+
 import com.pramati.turvo.banking.model.Token;
 
 public interface TokenService {
-	public Token createToken(Token token);
+	public ResponseEntity<? extends Object> createToken(Token token);
 
-	public Token markTokenAsComplete(Long tokenId);
-
-	public Token markTokenAsCancel(Long tokenId);
+	public ResponseEntity<? extends Object> markToken(Long tokenId, Token requestedToken);
 
 	public List<Token> getAllTokens();
 
 	public Token getTokenById(Long tokenId);
-	
-	public CounterQueue getCounterById(Integer counterid);
 
-	public List<CounterQueue> getAllCounters();
+	public ResponseEntity<? extends Object> getCounterById(Integer counterid);
+
+	public ResponseEntity<? extends Object> getAllCounters();
 
 }

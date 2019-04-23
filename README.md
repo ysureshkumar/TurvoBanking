@@ -23,7 +23,6 @@ Run the file install_schema.sql present in src/main/resources to set up the data
 - counter
 - service
 - token
-- user
 
 #ER Diagram
 
@@ -51,7 +50,7 @@ work in progress
 ## CustomerController
 
 	1. For Creating Customer
-		method = POST   url = http://localhost:8080/turvo/customers/createcustomer 
+		method = POST   url = http://localhost:8080/turvo/customers/
 
 
 			### while creating customer we should provide request body with cusromer details  as follows
@@ -64,21 +63,22 @@ work in progress
 				}
 
 	2. For Updaing Customer	
-		method = POST   url = http://localhost:8080/turvo/customers/updatecustomer/{customerId}
+		method = PUT   url = http://localhost:8080/turvo/customers/{customerId}
 
 	3. For Getting all Customers	
-		method = GET   url = http://localhost:8080/turvo/customers/getallcustomers 
+		method = GET   url = http://localhost:8080/turvo/customers 
 
-	4. For Getting one Customer information
-		method = GET   url = http://localhost:8080/turvo/customers
+	4. For Getting individual Customer information
+		method = GET   url = http://localhost:8080/turvo/customers/{customerId}
+
 
 ## TokenController
 
 	1. For creating Token
-		method = POST   url = http://localhost:8080/turvo/tokens/createtoken 
+		method = POST   url = http://localhost:8080/turvo/tokens 
 
 
-				### while assigning a token to customer we should provide request body with customerid nad serviceid as follows
+				### while assigning a token to customer we should provide request body with customerid and serviceid as follows
 
 					{
 						"customerid": "3",
@@ -86,24 +86,32 @@ work in progress
 					}
 
 	
-	2. For Updating Token by marking it as complete
-		method = PUT  url = http://localhost:8080/turvo/tokens/marktokenascomplete/{tokenId}
-	
-	3. For Updating Token by marking it as cancel
-		method = PUT   url = http://localhost:8080/turvo/tokens/marktokenascancel/{tokenId} 
+	2. For Updating Token by marking it as complete or cancel
+		method = PUT  url = http://localhost:8080/turvo/tokens/{tokenId}
+
+				### while marking token as complete we should provide request body with tokenid and status as follows
+
+					{
+						"tokenid": "3",
+						"status": "complete|cancel|progress"
+					}
 	
 	4. For Getting All Tokens
-		method = GET   url = http://localhost:8080/turvo/tokens/getalltokens 
+		method = GET   url = http://localhost:8080/turvo/tokens 
 	
-	5. For Getting One Token information
-		method = GET   url = http://localhost:8080/turvo/tokens/gettoken/{tokenId} 
+	
+	5. For Getting Individual Token information
+		method = GET   url = http://localhost:8080/turvo/tokens/{tokenId} 
+
 	 
 ## CounterController
-	1. For Getting One Counter information
-		method = GET   url = http://localhost:8080/turvo/counters/getcounter/{counterid} 
-	2. For Getting All Counters information
-		method = GET   url = http://localhost:8080/turvo/counters/getallcounters 
+	 
+	1. For Getting All Counters information
+		method = GET   url = http://localhost:8080/turvo/counters 
 
+	2. For Getting Individual Counter information
+		method = GET   url = http://localhost:8080/turvo/counters/{counterid}
+		
 ## A Small Description how tokens will be assigned
 
 First it will check counters based on the customer type and then check for the availability of the counters based on queue size and allocate the respective counter to the customer
