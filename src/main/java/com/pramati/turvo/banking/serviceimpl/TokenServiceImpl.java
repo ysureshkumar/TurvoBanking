@@ -20,9 +20,11 @@ import com.pramati.turvo.banking.model.Counter;
 import com.pramati.turvo.banking.model.CounterQueue;
 import com.pramati.turvo.banking.model.Customer;
 import com.pramati.turvo.banking.model.Token;
+import com.pramati.turvo.banking.model.TurvoServices;
 import com.pramati.turvo.banking.service.CounterService;
 import com.pramati.turvo.banking.service.CustomerService;
 import com.pramati.turvo.banking.service.TokenService;
+import com.pramati.turvo.banking.service.TurvoServicesService;
 
 @Service
 public class TokenServiceImpl implements TokenService {
@@ -35,11 +37,14 @@ public class TokenServiceImpl implements TokenService {
 
 	@Autowired
 	CounterService counterService;
+	
+	@Autowired
+	TurvoServicesService turvoServicesService;
 
 	int queueSizeLimit = 5;
 
 	// Counter Queues
-	Queue<Long> counter1Q = new LinkedList<Long>(); // regular counter
+	Queue<Long> counter1Q = new LinkedList<Long>(); // regular counter@Autowired
 	Queue<Long> counter2Q = new LinkedList<Long>(); // regular counter
 	Queue<Long> counter3Q = new LinkedList<Long>(); // regular counter
 	Queue<Long> counter4Q = new LinkedList<Long>(); // prime counter
@@ -65,6 +70,20 @@ public class TokenServiceImpl implements TokenService {
 			turvoException.setException(turvoException.getClass().toString());
 			return ResponseEntity.ok().body(turvoException);
 		}
+		
+		
+		TurvoServices turvoServices = turvoServicesService.getTurvoServiceById(token.getServiceid());
+		
+		if (turvoServices == null) {
+			String message = "Invalid Service Id: "+token.getServiceid();
+			TurvoException turvoException = new TurvoException();
+			turvoException.setStatus(HttpStatus.BAD_REQUEST.value());
+			turvoException.setMessage(message);
+			turvoException.setError(HttpStatus.BAD_REQUEST);
+			turvoException.setException(turvoException.getClass().toString());
+			return ResponseEntity.ok().body(turvoException);
+		}
+		
 		Long customerid;
 		Long tokenid;
 		Integer selectedCounterid;
@@ -205,9 +224,8 @@ public class TokenServiceImpl implements TokenService {
 			return ResponseEntity.ok().body(turvoException);
 		}
 
-		if (requestedToken == null) {
-			String errorMessage = "Request Body missing token as follows\n"
-					+ "{\"tokenid\": int,\"status\": \"progress or complete or cancel\"}";
+		if (requestedToken.getTokenid() == null || requestedToken.getStatus() == null) {
+			String errorMessage = "Request Body missing token as follows {'tokenid': int,'status': 'progress or complete or cancel'}";
 			TurvoException turvoException = new TurvoException();
 			turvoException.setStatus(HttpStatus.BAD_REQUEST.value());
 			turvoException.setMessage(errorMessage);

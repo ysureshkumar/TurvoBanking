@@ -28,6 +28,16 @@ CREATE TABLE `token` (
   CONSTRAINT `token_counter_FK` FOREIGN KEY (`counterid`) REFERENCES `counter` (`counterid`)
 );
 
+CREATE TABLE `user` (
+  `user_id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `role_name` varchar(50) DEFAULT NULL
+);
+
+insert into user values(1,'Pramati','pramatiadmin','ADMIN');
+insert into user values(2,'Suresh','sureshuser','USER');
+
 insert into counter values (1, 'regular');
 insert into counter values (2, 'regular');
 insert into counter values (3, 'regular');

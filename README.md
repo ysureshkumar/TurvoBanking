@@ -112,6 +112,16 @@ work in progress
 	2. For Getting Individual Counter information
 		method = GET   url = http://localhost:8080/turvo/counters/{counterid}
 		
+## ServiceController
+	 
+	1. For Getting All Services information
+		method = GET   url = http://localhost:8080/turvo/services 
+
+	2. For Getting Individual Service information
+		method = GET   url = http://localhost:8080/turvo/services/{serviceid}
+		
+				
+
 ## A Small Description how tokens will be assigned
 
 First it will check counters based on the customer type and then check for the availability of the counters based on queue size and allocate the respective counter to the customer
