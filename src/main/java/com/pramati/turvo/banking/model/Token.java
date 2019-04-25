@@ -1,19 +1,16 @@
 package com.pramati.turvo.banking.model;
 
-import java.io.IOException;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "token")
@@ -31,6 +28,21 @@ public class Token {
 
 	private String status;
 
+	@ManyToOne(optional=false)
+	@JoinColumn(name="customerid",referencedColumnName="customerid", insertable=false, updatable=false)
+	@JsonIgnore
+	Customer customerEntity;
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name="counterid",referencedColumnName="counterid", insertable=false, updatable=false)
+	@JsonIgnore
+	Counter counterEntity;
+
+	@ManyToOne(optional=false)
+	@JoinColumn(name="serviceid",referencedColumnName="serviceid", insertable=false, updatable=false)
+	@JsonIgnore
+	TurvoServices serviceEntity;
+	
 	public Token() {
 	}
 
@@ -81,5 +93,27 @@ public class Token {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Customer getCustomerEntity() {
+		return customerEntity;
+	}
+
+	public void setCustomerEntity(Customer customerEntity) {
+		this.customerEntity = customerEntity;
+	}
+	public Counter getCounterEntity() {
+		return counterEntity;
+	}
+
+	public void setCounterEntity(Counter counterEntity) {
+		this.counterEntity = counterEntity;
+	}
+
+	public TurvoServices getServiceEntity() {
+		return serviceEntity;
+	}
+
+	public void setServiceEntity(TurvoServices serviceEntity) {
+		this.serviceEntity = serviceEntity;
 	}
 }

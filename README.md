@@ -23,16 +23,11 @@ Run the file install_schema.sql present in src/main/resources to set up the data
 - counter
 - service
 - token
-
-#ER Diagram
-
-work in progress
+- user
 
 #Class Diagram
-
-work in progress
-
-
+	- To see the relation between the Database table(enities) you can see in the class diagran
+	- Filename: /TurvoBanking/TurvoClassDiagram.ucls 
 # Importing  the Project (use Eclipse or any other compatibile Editor)
 
 	- Import as *Existing Maven Project* and run it as *Spring Boot App*.
@@ -74,7 +69,7 @@ work in progress
 
 ## TokenController
 
-	1. For creating Token
+	1. For creating Token ( This action can be done by both USER and ADMIN)
 		method = POST   url = http://localhost:8080/turvo/tokens 
 
 
@@ -86,7 +81,7 @@ work in progress
 					}
 
 	
-	2. For Updating Token by marking it as complete or cancel
+	2. For Updating Token by marking it as complete or cancel (This action can be done only by ADMIN)
 		method = PUT  url = http://localhost:8080/turvo/tokens/{tokenId}
 
 				### while marking token as complete we should provide request body with tokenid and status as follows
@@ -96,31 +91,30 @@ work in progress
 						"status": "complete|cancel|progress"
 					}
 	
-	4. For Getting All Tokens
+	4. For Getting All Tokens (This action can be done by both USER and ADMIN)
 		method = GET   url = http://localhost:8080/turvo/tokens 
 	
 	
-	5. For Getting Individual Token information
+	5. For Getting Individual Token information (This action can be done by both USER and ADMIN)
 		method = GET   url = http://localhost:8080/turvo/tokens/{tokenId} 
 
 	 
 ## CounterController
 	 
-	1. For Getting All Counters information
+	1. For Getting All Counters information (This action can be done by both USER and ADMIN)
 		method = GET   url = http://localhost:8080/turvo/counters 
 
-	2. For Getting Individual Counter information
+	2. For Getting Individual Counter information (This action can be done by both USER and ADMIN)
 		method = GET   url = http://localhost:8080/turvo/counters/{counterid}
 		
 ## ServiceController
 	 
-	1. For Getting All Services information
+	1. For Getting All Services information (This action can be done by both USER and ADMIN)
 		method = GET   url = http://localhost:8080/turvo/services 
 
-	2. For Getting Individual Service information
+	2. For Getting Individual Service information (This action can be done by both USER and ADMIN)
 		method = GET   url = http://localhost:8080/turvo/services/{serviceid}
 		
-				
 
 ## A Small Description how tokens will be assigned
 

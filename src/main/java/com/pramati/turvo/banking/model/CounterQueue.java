@@ -1,43 +1,20 @@
 package com.pramati.turvo.banking.model;
 
-import java.io.IOException;
 import java.util.Queue;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CounterQueue {
 
-	private Integer counterId;
-
-	private String counterType;
+	private Counter counterEntity;
 
 	private Queue<Long> counterQ;
 
-	public Integer getCounterId() {
-		return counterId;
+
+	public Counter getCounterEntity() {
+		return counterEntity;
 	}
 
-	public void setCounterId(Integer counterId) {
-		this.counterId = counterId;
-	}
-
-	public String getCounterType() {
-		return counterType;
-	}
-
-	public void setCounterType(String counterType) {
-		this.counterType = counterType;
+	public void setCounterEntity(Counter counterEntity) {
+		this.counterEntity = counterEntity;
 	}
 
 	public Queue<Long> getCounterQ() {

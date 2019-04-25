@@ -419,8 +419,7 @@ public class TokenServiceImpl implements TokenService {
 		}
 
 		CounterQueue counterQueue = new CounterQueue();
-		counterQueue.setCounterId(counterid);
-		counterQueue.setCounterType(counter.getCountertype());
+		counterQueue.setCounterEntity(counter);
 
 		switch (counterid) {
 		case 1:
@@ -463,8 +462,7 @@ public class TokenServiceImpl implements TokenService {
 		while (counterid <= countOfCounters) {
 			Counter counter = counterService.getCounterById(counterid);
 			CounterQueue counterQueue = new CounterQueue();
-			counterQueue.setCounterId(counterid);
-			counterQueue.setCounterType(counter.getCountertype());
+			counterQueue.setCounterEntity(counter);
 
 			switch (counterid) {
 			case 1:
